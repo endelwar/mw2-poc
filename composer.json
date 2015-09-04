@@ -1,0 +1,39 @@
+{
+  "name": "mailwatch/mailwatch",
+  "description": "a Web frontend to MailScanner",
+  "license": "GPL-3.0",
+  "type": "project",
+  "authors": [
+    {
+      "name": "Manuel Dalla Lana",
+      "email": "endelwar@aregar.it",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "MailWatch\\": "app/lib/MailWatch",
+      "MailWatch\\Controller\\": "app/controller",
+      "MailWatch\\Model\\": "app/model"
+    }
+  },
+  "require": {
+    "php": ">=5.3.3",
+    "ext-pcre": "*",
+    "ext-curl": "*",
+    "ext-mbstring": "*",
+    "twig/twig": "~1.19",
+    "dannyvankooten/php-router": "dev-master",
+    "patchwork/utf8": "~1.2",
+    "geoip2/geoip2": "~2.3",
+    "doctrine/dbal": "~2.5"
+  },
+  "suggest": {
+    "ext-intl": "Use Intl for best performance",
+    "ext-iconv": "Use iconv for best performance"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.*",
+    "squizlabs/PHP_CodeSniffer": "2.*"
+  }
+}

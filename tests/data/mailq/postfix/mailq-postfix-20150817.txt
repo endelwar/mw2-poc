@@ -1,0 +1,41 @@
+-Queue ID- --Size-- ----Arrival Time---- -Sender/Recipient-------
+EA615204D0!    5858 Mon Aug 17 11:35:46  jabri.khaled@example.com
+                                         mohammad71@example.org
+
+BED67200A1!     954 Mon Aug 17 11:34:38  Braun.Elbert@example.org
+                                         Vida35@example.net
+
+52A3E204CD!    1866 Mon Aug 17 11:38:42  postmaster@mailwatch.dev
+                                         postmaster@mailwatch.dev
+
+CC375204AD!    1013 Mon Aug 17 11:34:38  Rachelle.Harber@example.com
+                                         Danika37@example.org
+
+043FE204D4!    6203 Mon Aug 17 11:35:47  yazan.abulebbeh@example.org
+                                         qasem.ahmad@example.org
+
+E3DDF204CC!     988 Mon Aug 17 11:34:38  Crist.Hassie@example.net
+                                         Kenya.Murphy@example.com
+
+317A7204D3!    1180 Mon Aug 17 10:46:53  postmaster@mailwatch.dev
+                                         postmaster@mailwatch.dev
+
+C820B204F7!    1571 Mon Aug 17 11:57:58  postmaster@mailwatch.dev
+                                         postmaster@mailwatch.dev
+
+F03A5204CE!     987 Mon Aug 17 11:34:38  Emmett.Dicki@example.com
+                                         Kailee.Stamm@example.org
+
+DC775200B7!    2619 Mon Aug 17 11:35:46  abulebbeh.bilal@example.net
+                                         ymaanee@example.com
+
+12120204D5!    5378 Mon Aug 17 11:35:47  prabee@example.net
+                                         zkaram@example.org
+
+78562204D1!    1866 Mon Aug 17 11:46:27  postmaster@mailwatch.dev
+                                         postmaster@mailwatch.dev
+
+D85F6204C9!     982 Mon Aug 17 11:34:38  Jacynthe.Weimann@example.org
+                                         mSauer@example.org
+
+-- 37 Kbytes in 13 Requests.

@@ -1,0 +1,61 @@
+Received: from R2D2.local (unknown [93.37.254.21])
+	by server.gserver.it (Postfix) with ESMTPSA id E59A8500ACF
+	for <manuel@example.org>; Tue,  1 Sep 2015 11:49:54 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=aregar.it; s=mail;
+	t=1441100999; bh=nv5Ir0fMAugNFI9YaImoqKxkIXtIFFbUtBC22DCnNTc=;
+	h=To:From:Subject:Date:From;
+	b=RwXpDooBIqcA0pxbrRddnKGFK0NKEuFVrmW5hKTFL4IpvpoDxHa2J8jtb1RsYeNXO
+	 KwCwaG0oEc/WpA4qV8HUojRSGorKK28u36LBHRUkqAG7AesCIa00+rJPEd29ucMPyK
+	 tVeJ0cO9b8QY288xqjUD5T4PP6ZAXHdYwni+nDEw=
+X-Priority: 1 (Highest)
+To: manuel@example.org
+From: Manuel Dalla Lana <endelwar@aregar.it>
+Subject: Another example message
+Message-ID: <55E574BF.3010404@aregar.it>
+Date: Tue, 1 Sep 2015 11:49:51 +0200
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:38.0)
+ Gecko/20100101 Thunderbird/38.2.0
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="------------060404020007050103060600"
+
+This is a multi-part message in MIME format.
+--------------060404020007050103060600
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+
+Hi Manuel,
+another *great* email for /_you_/!
+
+Here is a simple todo list for today:
+
+  * Smile
+  * Smile Again
+
+
+Bye bye
+
+--------------060404020007050103060600
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  </head>
+  <body alink="#EE0000" bgcolor="#ffcccc" link="#0B6CDA" text="#000000"
+    vlink="#551A8B">
+    Hi <font color="#33cc00">Manuel</font>,<br>
+    another <b>great</b> email for <i><u>you</u></i>!<br>
+    <br>
+    Here is a simple todo list for today:<br>
+    <ul>
+      <li>Smile</li>
+      <li>Smile Again</li>
+    </ul>
+    <br>
+    Bye <font color="#ff0000">bye</font><br>
+  </body>
+</html>
+
+--------------060404020007050103060600--

@@ -1,0 +1,4 @@
+db:
+  dsn:        mysql:dbname=mailwatch;host=localhost
+  username:   mailwatch
+  password:   mailwatch
