@@ -16,8 +16,20 @@
 
 namespace MailWatch\Controller;
 
+use Http\Request;
+use Http\Response;
+use MailWatch\Template\Renderer;
+
 abstract class Base
 {
     protected $request;
+    protected $response;
+    protected $renderer;
 
+    public function __construct(Request $request, Response $response, Renderer $renderer)
+    {
+        $this->request = $request;
+        $this->response = $response;
+        $this->renderer = $renderer;
+    }
 }

@@ -16,7 +16,68 @@
 
 namespace MailWatch\Controller;
 
+use MailWatch\Validate\Network;
+
 class Setup extends Base
 {
+    public function createEnvFile()
+    {
+        if ($this->request->getMethod() === 'POST') {
+            var_dump($this->request->getParameter('db'));
+            $raw_db = $this->request->getParameter('db');
+            if ($errors = $this->validateEnvDbData($raw_db)) {
+                //write file
 
+                //redirect
+
+                return;
+            } else {
+                var_dump($errors);
+                $render_vars['errors'] = $errors;
+            }
+        }
+        $render_vars['htmltitle'] = 'Setup';
+        $html = $this->renderer->render('setup/form_db_data', $render_vars);
+        $this->response->setContent($html);
+    }
+
+    /**
+     * @param array $db
+     * @return array|bool
+     */
+    private function validateEnvDbData(array $db)
+    {
+        $errors = array();
+        $validDriver = array('mysql', 'postgresql');
+
+        // check database driver
+        if (!isset($db['driver']) || !in_array($db['driver'], $validDriver, true)) {
+            // ko
+            $errors['driver'] = true;
+        }
+
+        $networkValidator = new Network();
+
+        // check hostname validity
+        if (!$networkValidator->isIpOrHostname($db['host'])) {
+            $errors['hostname'] = true;
+        }
+
+        // check port range
+        if (!$networkValidator->isValidPort($db['port'])) {
+            $errors['port'] = true;
+        }
+
+        if (empty($errors)) {
+            return true;
+        }
+
+        return $errors;
+    }
+
+    public function createDatabase()
+    {
+        $html = $this->renderer->render('setup/dbinfo', array('htmltitle' => 'Setup'));
+        $this->response->setContent($html);
+    }
 }

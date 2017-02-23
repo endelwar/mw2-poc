@@ -1,0 +1,69 @@
+{% extends "layout.twig" %}
+{% block html_title %}Check Requirements{% endblock %}
+{% block body_css_addon_class %}requirements-page{% endblock %}
+{% block content %}
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-xs-8 col-md-push-2">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Check MailWatch2 Requirements</h3>
+                    </div>
+                </div>
+
+                <div class="box box-default">
+                    <div class="box-body">
+                        {% if failedRequirements > 0 %}
+                            <div class="callout callout-danger">
+                                <h4>Uh Oh!</h4>
+
+                                <p>Some Requirements are not met. Look below to find what's wrong.</p>
+                            </div>
+                        {% else %}
+                            <div class="callout callout-success">
+                                <h4>Requirements fullfilled!</h4>
+
+                                <p>Your system is ready to run MailWatch2</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="box box-default">
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th>Requirement</th>
+                                <th>Notes</th>
+                            </tr>
+                            {% for req in requirements %}
+                                <tr>
+                                    <td>{% if req.isFulfilled() %}<span class="label label-success">OK</span>{% else %}
+                                            <span class="label label-danger">KO</span>{% endif %}</td>
+                                    <td>{{ req.getTestMessage() }}</td>
+                                    <td>{% if req.isFulfilled() %}&nbsp;{% else %}{{ req.getHelpHtml()|raw }}{% endif %}</td>
+                                </tr>
+                            {% endfor %}
+
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th>Raccomandation</th>
+                                <th>Notes</th>
+                            </tr>
+                            {% for rac in raccomandations %}
+                                <tr>
+                                    <td>{% if rac.isFulfilled() %}<span class="label label-success">OK</span>{% else %}
+                                            <span class="label label-danger">KO</span>{% endif %}</td>
+                                    <td>{{ rac.getTestMessage() }}</td>
+                                    <td>{% if rac.isFulfilled() %}&nbsp;{% else %}{{ rac.getHelpHtml()|raw }}{% endif %}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

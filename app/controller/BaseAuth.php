@@ -16,14 +16,19 @@
 
 namespace MailWatch\Controller;
 
+use Http\Request;
+use Http\Response;
+use MailWatch\Template\Renderer;
 use MailWatch\Model\User;
 
 abstract class BaseAuth extends Base
 {
-    public function __construct() {
-        if(!User::isLoggedIn()) {
-
+    public function __construct(Request $request, Response $response, Renderer $renderer)
+    {
+        if (!User::isLoggedIn()) {
             exit;
         }
+
+        parent::__construct($request, $response, $renderer);
     }
 }

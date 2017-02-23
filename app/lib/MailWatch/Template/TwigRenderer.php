@@ -14,8 +14,21 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace MailWatch;
+namespace MailWatch\Template;
 
-class Setup
+use Twig_Environment;
+
+class TwigRenderer implements Renderer
 {
+    private $renderer;
+
+    public function __construct(Twig_Environment $renderer)
+    {
+        $this->renderer = $renderer;
+    }
+
+    public function render($template, $data = array())
+    {
+        return $this->renderer->render("$template.twig", $data);
+    }
 }

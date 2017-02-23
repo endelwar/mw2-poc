@@ -90,6 +90,7 @@ class RequirementCollection implements \IteratorAggregate
      * @param string $testMessage The message for testing the requirement (when null and $evaluation is a boolean a default message is derived)
      * @param string $helpHtml The help text formatted in HTML for resolving the problem (when null and $evaluation is a boolean a default help is derived)
      * @param string|null $helpText The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
+     * @throws \InvalidArgumentException
      */
     public function addPhpIniRequirement(
         $cfgName,
@@ -99,8 +100,15 @@ class RequirementCollection implements \IteratorAggregate
         $helpHtml = null,
         $helpText = null
     ) {
-        $this->add(new PhpIniRequirement($cfgName, $evaluation, $approveCfgAbsence, $testMessage, $helpHtml, $helpText,
-            false));
+        $this->add(new PhpIniRequirement(
+            $cfgName,
+            $evaluation,
+            $approveCfgAbsence,
+            $testMessage,
+            $helpHtml,
+            $helpText,
+            false
+        ));
     }
 
     /**
@@ -115,6 +123,7 @@ class RequirementCollection implements \IteratorAggregate
      * @param string $testMessage The message for testing the requirement (when null and $evaluation is a boolean a default message is derived)
      * @param string $helpHtml The help text formatted in HTML for resolving the problem (when null and $evaluation is a boolean a default help is derived)
      * @param string|null $helpText The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
+     * @throws \InvalidArgumentException
      */
     public function addPhpIniRecommendation(
         $cfgName,
@@ -124,8 +133,15 @@ class RequirementCollection implements \IteratorAggregate
         $helpHtml = null,
         $helpText = null
     ) {
-        $this->add(new PhpIniRequirement($cfgName, $evaluation, $approveCfgAbsence, $testMessage, $helpHtml, $helpText,
-            true));
+        $this->add(new PhpIniRequirement(
+            $cfgName,
+            $evaluation,
+            $approveCfgAbsence,
+            $testMessage,
+            $helpHtml,
+            $helpText,
+            true
+        ));
     }
 
     /**
@@ -224,7 +240,7 @@ class RequirementCollection implements \IteratorAggregate
     public function hasPhpIniConfigIssue()
     {
         foreach ($this->requirements as $req) {
-            if (!$req->isFulfilled() && $req instanceof PhpIniRequirement) {
+            if ($req instanceof PhpIniRequirement && !$req->isFulfilled()) {
                 return true;
             }
         }

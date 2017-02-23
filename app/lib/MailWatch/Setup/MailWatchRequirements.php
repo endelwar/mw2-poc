@@ -32,7 +32,7 @@ namespace MailWatch\Setup;
  */
 class MailWatchRequirements extends RequirementCollection
 {
-    const REQUIRED_PHP_VERSION = '5.3.3';
+    const REQUIRED_PHP_VERSION = '5.3.9';
 
     /**
      * Constructor that initializes the requirements.
@@ -40,16 +40,22 @@ class MailWatchRequirements extends RequirementCollection
     public function __construct()
     {
         /* mandatory requirements follow */
-        $installedPhpVersion = phpversion();
+        $installedPhpVersion = PHP_VERSION;
 
         $this->addRequirement(
             version_compare($installedPhpVersion, self::REQUIRED_PHP_VERSION, '>='),
             sprintf('PHP version must be at least %s (%s installed)', self::REQUIRED_PHP_VERSION, $installedPhpVersion),
-            sprintf('You are running PHP version "<strong>%s</strong>", but MailWatch needs at least PHP "<strong>%s</strong>" to run.
+            sprintf(
+                'You are running PHP version "<strong>%s</strong>", but MailWatch needs at least PHP "<strong>%s</strong>" to run.
                 Before using MailWatch, upgrade your PHP installation, preferably to the latest version.',
-                $installedPhpVersion, self::REQUIRED_PHP_VERSION),
-            sprintf('Install PHP %s or newer (installed version is %s)', self::REQUIRED_PHP_VERSION,
-                $installedPhpVersion)
+                $installedPhpVersion,
+                self::REQUIRED_PHP_VERSION
+            ),
+            sprintf(
+                'Install PHP %s or newer (installed version is %s)',
+                self::REQUIRED_PHP_VERSION,
+                $installedPhpVersion
+            )
         );
 
         $this->addRequirement(
@@ -59,21 +65,30 @@ class MailWatchRequirements extends RequirementCollection
         );
 
         $this->addRequirement(
-            is_dir(__DIR__ . '/../vendor/composer'),
+            is_dir(__DIR__ . '/../../../../vendor/composer'),
             'Vendor libraries must be installed',
             'Vendor libraries are missing. Install composer following instructions from <a href="http://getcomposer.org/">http://getcomposer.org/</a>. ' .
             'Then run "<strong>php composer.phar install</strong>" to install them.'
         );
 
-        $cacheDir = __DIR__ . '/../cache';
+        $cacheDir = __DIR__ . '/../../../../cache';
         $this->addRequirement(
             is_writable($cacheDir),
             'cache/ directory must be writable',
             'Change the permissions of "<strong>cache/</strong>" directory so that the web server can write into it.'
         );
 
+        $dataDir = __DIR__ . '/../../../../data';
+        $this->addRequirement(
+            is_writable($dataDir),
+            'data/ directory must be writable',
+            'Change the permissions of "<strong>data/</strong>" directory so that the web server can write into it.'
+        );
+
         $this->addPhpIniRequirement(
-            'date.timezone', true, false,
+            'date.timezone',
+            true,
+            false,
             'date.timezone setting must be set',
             'Set the "<strong>date.timezone</strong>" setting in php.ini<a href="#phpini">*</a> (like Europe/Rome).'
         );
@@ -87,8 +102,10 @@ class MailWatchRequirements extends RequirementCollection
             }
             $this->addRequirement(
                 isset($timezones[@date_default_timezone_get()]),
-                sprintf('Configured default timezone "%s" must be supported by your installation of PHP',
-                    @date_default_timezone_get()),
+                sprintf(
+                    'Configured default timezone "%s" must be supported by your installation of PHP',
+                    @date_default_timezone_get()
+                ),
                 'Your default timezone is not supported by PHP. Check for typos in your <strong>php.ini</strong> file and have a look at the list of deprecated timezones at <a href="http://php.net/manual/en/timezones.others.php">http://php.net/manual/en/timezones.others.php</a>.'
             );
         }
@@ -118,6 +135,17 @@ class MailWatchRequirements extends RequirementCollection
         }
 
         $this->addRequirement(
+            function_exists('utf8_decode'),
+            'utf8_decode() should be available',
+            'Install and enable the <strong>XML</strong> extension.'
+        );
+        $this->addRequirement(
+            function_exists('filter_var'),
+            'filter_var() should be available',
+            'Install and enable the <strong>filter</strong> extension.'
+        );
+
+        $this->addRequirement(
             class_exists('PDO'),
             'PDO must be installed',
             'Install <strong>PDO</strong> (mandatory for database connection).'
@@ -126,19 +154,15 @@ class MailWatchRequirements extends RequirementCollection
             $drivers = \PDO::getAvailableDrivers();
             $this->addRequirement(
                 count($drivers) > 0,
-                sprintf('PDO must have some drivers installed (currently available: %s)',
-                    count($drivers) ? implode(', ', $drivers) : 'none'),
+                sprintf(
+                    'PDO must have some drivers installed (currently available: %s)',
+                    count($drivers) ? implode(', ', $drivers) : 'none'
+                ),
                 'Install <strong>PDO drivers</strong> (mandatory for database connection).'
             );
         }
 
         // Recommendations
-        $this->addRecommendation(
-            version_compare($installedPhpVersion, '5.3.4', '>='),
-            'You should use at least PHP 5.3.4 due to PHP bug #52083 in earlier versions',
-            'MailWatch might malfunction randomly due to PHP bug #52083 ("Notice: Trying to get property of non-object"). Install PHP 5.3.4 or newer.'
-        );
-
         $this->addRecommendation(
             version_compare($installedPhpVersion, '5.4.0', '!='),
             'You should not use PHP 5.4.0 due to the PHP bug #61453',
@@ -150,16 +174,6 @@ class MailWatchRequirements extends RequirementCollection
             'iconv() should be available',
             'Install and enable the <strong>iconv</strong> extension.'
         );
-        $this->addRecommendation(
-            function_exists('utf8_decode'),
-            'utf8_decode() should be available',
-            'Install and enable the <strong>XML</strong> extension.'
-        );
-        $this->addRecommendation(
-            function_exists('filter_var'),
-            'filter_var() should be available',
-            'Install and enable the <strong>filter</strong> extension.'
-        );
 
         $this->addRecommendation(
             extension_loaded('intl'),
@@ -169,7 +183,7 @@ class MailWatchRequirements extends RequirementCollection
         if (extension_loaded('intl')) {
             // in some WAMP server installations, new Collator() returns null
             $this->addRecommendation(
-                null !== new \Collator('fr_FR'),
+                null !== new \Collator('it_IT'),
                 'intl extension should be correctly configured',
                 'The intl extension does not behave properly. This problem is typical on PHP 5.3.X x64 WIN builds.'
             );
@@ -212,31 +226,11 @@ class MailWatchRequirements extends RequirementCollection
             ||
             (extension_loaded('Zend OPcache') && ini_get('opcache.enable'))
             ||
-            (extension_loaded('xcache') && ini_get('xcache.cacher'))
-            ||
-            (extension_loaded('wincache') && ini_get('wincache.ocenabled'));
+            (extension_loaded('xcache') && ini_get('xcache.cacher'));
         $this->addRecommendation(
             $accelerator,
             'a PHP accelerator should be installed',
             'Install and/or enable a <strong>PHP accelerator</strong> (highly recommended for performance).'
         );
-
-        /*$this->addRecommendation(
-            version_compare($installedPhpVersion, '5.3.8', '>='),
-            'When using annotations you should have at least PHP 5.3.8 due to PHP bug #55156',
-            'Install PHP 5.3.8 or newer if your project uses annotations.'
-        );*/
-
-        /*
-        $this->addRecommendation(
-            (version_compare($installedPhpVersion, '5.3.18', '>=') &&
-                version_compare($installedPhpVersion, '5.4.0', '<')
-            )
-            ||
-            version_compare($installedPhpVersion, '5.4.8', '>='),
-            'You should use PHP 5.3.18+ or PHP 5.4.8+ to always get nice error messages for fatal errors in the development environment due to PHP bug #61767/#60909',
-            'Install PHP 5.3.18+ or PHP 5.4.8+ if you want nice error messages for all fatal errors in the development environment.'
-        );
-        */
     }
 }

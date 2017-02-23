@@ -2,6 +2,6 @@ base_path: /
 
 routes:
   index: [/, MailWatch\Controller\Dashboard.show, GET]
-  setup: [/setup, setup.index, GET]
-  login: [/login, auth.login, GET]
-  login: [/logout, auth.logout, GET]
+  setup: [/setup, MailWatch\Controller\Setup.index, GET]
+  login: [/login, MailWatch\Controller\Auth.login, GET]
+  logout: [/logout, MailWatch\Controller\Auth.logout, GET]

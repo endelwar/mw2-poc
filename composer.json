@@ -7,7 +7,7 @@
     {
       "name": "Manuel Dalla Lana",
       "email": "endelwar@aregar.it",
-      "role": "Developer"
+      "role": "Lead Developer"
     }
   ],
   "autoload": {
@@ -18,22 +18,36 @@
     }
   },
   "require": {
-    "php": ">=5.3.3",
+    "php": ">=5.3.9",
     "ext-pcre": "*",
     "ext-curl": "*",
     "ext-mbstring": "*",
-    "twig/twig": "~1.19",
-    "dannyvankooten/php-router": "dev-master",
+    "nikic/fast-route": "^0.6.0",
+    "filp/whoops": "^1.1",
+    "rdlowrey/auryn": "^1.1",
+    "twig/twig": "^1.22",
+    "patricklouys/http": "^1.2",
+    "doctrine/dbal": "~2.5",
     "patchwork/utf8": "~1.2",
     "geoip2/geoip2": "~2.3",
-    "doctrine/dbal": "~2.5"
+    "josegonzalez/dotenv": "^1.0",
+    "twig/extensions": "^1.3",
+    "symfony/process": "^2.7"
   },
   "suggest": {
-    "ext-intl": "Use Intl for best performance",
-    "ext-iconv": "Use iconv for best performance"
+    "ext-intl": "Use Intl extension for best performance",
+    "ext-iconv": "Use Iconv extension for best performance"
   },
   "require-dev": {
     "phpunit/phpunit": "4.*",
     "squizlabs/PHP_CodeSniffer": "2.*"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "MailWatch\\Tests\\": "tests/src"
+    }
+  },
+  "archive": {
+    "exclude": ["/tests"]
   }
 }

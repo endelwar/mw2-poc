@@ -16,7 +16,6 @@
 
 namespace MailWatch\Model;
 
-
 class Base
 {
 

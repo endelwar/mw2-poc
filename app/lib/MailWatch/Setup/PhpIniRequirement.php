@@ -60,10 +60,11 @@ class PhpIniRequirement extends Requirement
             if (null === $testMessage || null === $helpHtml) {
                 throw new \InvalidArgumentException('You must provide the parameters testMessage and helpHtml for a callback evaluation.');
             }
-            $fulfilled = call_user_func($evaluation, $cfgValue);
+            $fulfilled = $evaluation($cfgValue);
         } else {
             if (null === $testMessage) {
-                $testMessage = sprintf('%s %s be %s in php.ini',
+                $testMessage = sprintf(
+                    '%s %s be %s in php.ini',
                     $cfgName,
                     $optional ? 'should' : 'must',
                     $evaluation ? 'enabled' : 'disabled'
@@ -76,7 +77,7 @@ class PhpIniRequirement extends Requirement
                     $evaluation ? 'on' : 'off'
                 );
             }
-            $fulfilled = $evaluation == $cfgValue;
+            $fulfilled = $evaluation === $cfgValue;
         }
         parent::__construct(
             $fulfilled || ($approveCfgAbsence && false === $cfgValue),

@@ -1,0 +1,6 @@
+-Queue ID- --Size-- ----Arrival Time---- -Sender/Recipient-------
+5D28A1482244    19199 Wed Sep 23 17:36:39  no-reply@example.org
+(host mail.example.com[192.168.124.132] said: 452 4.1.1  4.2.2 mailbox full (in reply to RCPT TO command))
+                                         alessandro@example.com
+
+-- 19 Kbytes in 1 Request.

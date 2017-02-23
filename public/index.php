@@ -14,18 +14,7 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-require __DIR__ . '/../vendor/autoload.php';
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-use PHPRouter\RouteCollection;
-use PHPRouter\Config as RouteConfig;
-use PHPRouter\Router;
-use PHPRouter\Route;
-
-\Patchwork\Utf8\Bootup::initAll(); // Enables the portablity layer and configures PHP for UTF-8
-\Patchwork\Utf8\Bootup::filterRequestUri(); // Redirects to an UTF-8 encoded URL if it's not already the case
-\Patchwork\Utf8\Bootup::filterRequestInputs(); // Normalizes HTTP inputs to UTF-8 NFC
-
-$config = RouteConfig::loadFromFile(__DIR__ . '/../config/routes.yaml');
-$router = Router::parseConfig($config);
-var_dump($router);
-$router->matchCurrentRequest();
+require __DIR__ . '/../app/Bootstrap.php';
